@@ -508,11 +508,6 @@
         gap: 5px !important;
       }
 
-      .sub-tab:last-child {
-        flex: 1 1 100% !important;
-        max-width: 100% !important;
-      }
-
       .sub-tab i {
         font-size: 0.74rem !important;
         pointer-events: none;
@@ -629,26 +624,6 @@
 
       .student-info-nim {
         font-size: 0.7rem !important;
-      }
-
-      /* SQL Console di HP */
-      #admin-sub-sql .glass-card {
-        padding: 0.85rem !important;
-      }
-
-      #sql-input-query {
-        font-size: 0.8rem !important;
-        padding: 10px !important;
-        min-height: 80px !important;
-      }
-
-      #admin-sub-sql .btn-outline.btn-sm {
-        font-size: 0.68rem !important;
-        padding: 4px 7px !important;
-      }
-
-      #sql-result-container {
-        max-height: 320px !important;
       }
 
       /* Modal Admin di HP */
@@ -771,9 +746,6 @@
       </button>
       <button class="sub-tab" data-sub="admin-sub-reports">
         <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Selesai
-      </button>
-      <button class="sub-tab" data-sub="admin-sub-sql">
-        <i class="fa-solid fa-terminal"></i> Database SQL
       </button>
     </div>
 
@@ -922,62 +894,6 @@
       </div>
     </div>
 
-    <!-- Sub 5: SQL Query Console (Database Query Simulator) -->
-    <div id="admin-sub-sql" class="admin-sub-panel">
-      <div class="panel-header-sub">
-        <div>
-          <h3>Database Query Console (SQL Simulator)</h3>
-          <p class="text-muted">Eksekusi perintah query SQL langsung (SELECT, INSERT, UPDATE, DELETE) pada tabel
-            <code>users</code>, <code>fasilitas</code>, dan <code>peminjaman</code>.</p>
-        </div>
-      </div>
-
-      <div class="glass-card" style="padding:1.5rem; margin-bottom:1.5rem;">
-        <div
-          style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-          <span style="font-weight:700; color:var(--text-primary);"><i class="fa-solid fa-terminal text-primary"></i>
-            Editor Perintah SQL:</span>
-          <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(1)">Query 1: Semua
-              Mahasiswa</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(2)">Query 2: Alat
-              Tersedia</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(3)">Query 3: Peminjaman
-              Pending</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(4)">Query 4: Riwayat
-              Peminjaman</button>
-          </div>
-        </div>
-
-        <textarea id="sql-input-query" rows="4"
-          style="width:100%; font-family:Consolas, 'Courier New', monospace; font-size:0.95rem; background:#0f172a; color:#38bdf8; border:1px solid #334155; border-radius:8px; padding:14px; outline:none; resize:vertical;"
-          placeholder="Tuliskan query SQL di sini, contoh: SELECT * FROM users;"></textarea>
-
-        <div
-          style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; flex-wrap:wrap; gap:10px;">
-          <div style="font-size:0.8rem; color:var(--text-muted);">
-            Tabel tersedia: <code style="color:#059669; font-weight:700;">users</code> (Mahasiswa & Admin), <code
-              style="color:#059669; font-weight:700;">fasilitas</code> (Inventaris Alat), <code
-              style="color:#059669; font-weight:700;">peminjaman</code> (Transaksi).
-          </div>
-          <button type="button" class="btn btn-primary" onclick="runSqlQuery()" style="padding:8px 20px;">
-            <i class="fa-solid fa-play"></i> Eksekusi Query
-          </button>
-        </div>
-      </div>
-
-      <div class="glass-card" style="padding:1.5rem;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h4 style="font-weight:700;"><i class="fa-solid fa-table-list"></i> Hasil Eksekusi Query (Result Set)</h4>
-          <span id="sql-exec-info" style="font-size:0.82rem; color:var(--text-muted);">Status: Siap menjalankan
-            query</span>
-        </div>
-        <div id="sql-result-container" style="overflow-x:auto; max-height:450px;">
-          <p class="text-muted" style="padding:1rem 0;">Belum ada query yang dieksekusi. Klik salah satu tombol contoh
-            query atau ketik query SQL Anda di atas.</p>
-        </div>
-      </div>
-    </div>
   </main>
 
   <!-- Modal: Tambah / Edit Fasilitas Baru (Admin) -->

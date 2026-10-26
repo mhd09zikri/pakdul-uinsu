@@ -1855,11 +1855,6 @@ body::before {
     justify-content: center;
   }
 
-  .sub-tab:last-child {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
   /* Footer di HP */
   .footer {
     padding: 1.5rem 1rem;
