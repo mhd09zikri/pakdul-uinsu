@@ -14,11 +14,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Styling Khusus Khusus Halaman Admin */
+    /* Styling Khusus Halaman Admin */
+    html, body {
+      width: 100% !important;
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      position: relative;
+    }
+
+    .main-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 1.5rem 1.25rem 4rem 1.25rem;
+    }
+
     .admin-navbar {
       background: #0f172a;
       border-bottom: 2px solid #059669;
       color: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .admin-navbar .brand-title {
@@ -42,20 +59,24 @@
       gap: 6px;
     }
 
+
+
     /* Clean & Simple Admin Hero Banner */
     .admin-simple-banner {
       background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
       color: #ffffff;
       border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 1.5rem 2rem;
+      padding: 1.5rem 1.8rem;
       border-radius: var(--radius-md);
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 1.25rem;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .admin-badge-tag {
@@ -73,7 +94,7 @@
     }
 
     .admin-banner-info h2 {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 4px;
@@ -81,7 +102,7 @@
 
     .admin-banner-info p {
       color: #cbd5e1;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       max-width: 620px;
       margin: 0;
     }
@@ -90,6 +111,16 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+    }
+
+    /* Kartu Metrik Admin */
+    .admin-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Header for Simple Table Panel */
@@ -104,6 +135,8 @@
       padding: 1.25rem 1.5rem;
       border-radius: var(--radius-md);
       border: 1px solid var(--border-light);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .search-filter-bar {
@@ -162,7 +195,26 @@
       background: #ffffff;
     }
 
-    /* Table Enhancements */
+    /* Container Tabel & Custom Table */
+    .table-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 1.5rem;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
     .custom-table th {
       background: #0f172a;
       color: #ffffff;
@@ -170,6 +222,7 @@
       font-size: 0.82rem;
       padding: 12px 14px;
       letter-spacing: 0.3px;
+      white-space: nowrap;
     }
 
     .custom-table td {
@@ -226,15 +279,23 @@
       margin-top: 2px;
     }
 
-    .item-highlight-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 8px 12px;
+    /* Petunjuk geser tabel di HP */
+    .table-swipe-hint {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      color: #047857;
+      background: #ecfdf5;
+      border: 1px dashed #a7f3d0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
     /* ==========================================================
-       RESPONSIVE ADMIN — TAMPILAN HANDPHONE (≤ 640px)
+       RESPONSIVE ADMIN — TABLET (≤ 900px)
        ========================================================== */
     @media (max-width: 900px) {
       .admin-simple-banner {
@@ -245,6 +306,7 @@
       }
       .admin-banner-actions {
         width: 100%;
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
       }
@@ -254,243 +316,340 @@
         justify-content: center;
       }
       .admin-metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 0.85rem;
       }
     }
 
+    /* ==========================================================
+       RESPONSIVE ADMIN — TAMPILAN HANDPHONE (≤ 640px)
+       ========================================================== */
     @media (max-width: 640px) {
-      /* ---- Navbar Admin di HP ---- */
+      /* Cegah elemen background membuat layar HP melebar */
+      .glow-bg {
+        display: none !important;
+      }
+
+      body {
+        font-size: 0.88rem;
+        overflow-x: hidden !important;
+        width: 100% !important;
+      }
+
+      /* Wrapper Utama di Handphone */
+      .main-wrapper {
+        padding: 0.85rem 0.75rem 3rem 0.75rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Navbar Admin di HP */
       .admin-navbar {
-        padding: 0.75rem 0.85rem;
-        gap: 0.6rem;
+        padding: 0.75rem 0.75rem !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.7rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
+
       .admin-navbar .nav-brand {
-        gap: 8px;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
       }
+
       .admin-navbar .brand-uinsu-logo {
-        width: 32px;
-        height: 32px;
+        width: 32px !important;
+        height: 32px !important;
       }
+
       .admin-navbar .brand-title {
-        font-size: 0.82rem;
+        font-size: 0.85rem !important;
+        line-height: 1.25 !important;
       }
+
       .admin-navbar .brand-sub {
-        font-size: 0.62rem;
+        font-size: 0.62rem !important;
+        line-height: 1.2 !important;
       }
+
       .admin-navbar .nav-actions {
-        gap: 5px;
-        flex-wrap: wrap;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        gap: 6px !important;
       }
+
       .admin-badge-pill {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-        gap: 4px;
-      }
-      .admin-navbar .nav-actions .btn {
-        font-size: 0.7rem;
-        padding: 5px 8px;
+        font-size: 0.7rem !important;
+        padding: 4px 8px !important;
+        gap: 4px !important;
+      .admin-navbar .btn-danger {
+        font-size: 0.7rem !important;
+        padding: 4px 9px !important;
       }
 
-      /* ---- Banner Admin di HP ---- */
+      /* Hero Banner Admin di HP */
       .admin-simple-banner {
-        padding: 1rem 0.85rem;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.85rem;
-        border-radius: 12px;
-        margin-bottom: 1.25rem;
+        padding: 1rem 0.85rem !important;
+        border-radius: 12px !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        gap: 0.85rem !important;
       }
+
       .admin-badge-tag {
-        font-size: 0.68rem;
-        padding: 3px 8px;
+        font-size: 0.68rem !important;
+        padding: 3px 8px !important;
       }
+
       .admin-banner-info h2 {
-        font-size: 1.1rem;
-        line-height: 1.3;
+        font-size: 1.12rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 4px !important;
       }
+
       .admin-banner-info p {
-        font-size: 0.78rem;
-        line-height: 1.4;
+        font-size: 0.78rem !important;
+        line-height: 1.45 !important;
       }
+
       .admin-banner-actions {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        width: 100% !important;
       }
+
       .admin-banner-actions .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 10px;
-        font-size: 0.82rem;
+        width: 100% !important;
+        padding: 8px 6px !important;
+        font-size: 0.76rem !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
       }
 
-      /* ---- Metrics Grid (4 Kartu Statistik) di HP ---- */
+      /* Metrics Grid (4 Kartu Statistik) Rapi 2 Kolom di HP */
       .admin-metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.65rem;
-        margin-bottom: 1.25rem;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.65rem !important;
+        margin-bottom: 1.15rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
+
       .metric-card {
-        padding: 0.85rem 0.75rem;
-        gap: 0.65rem;
-        border-radius: 12px;
+        padding: 0.75rem 0.65rem !important;
+        gap: 0.55rem !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
       }
+
       .metric-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        font-size: 1.1rem;
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 9px !important;
+        font-size: 1.05rem !important;
+        flex-shrink: 0 !important;
       }
+
       .metric-val {
-        font-size: 1.35rem;
+        font-size: 1.3rem !important;
+        line-height: 1.1 !important;
       }
+
       .metric-title {
-        font-size: 0.68rem;
+        font-size: 0.68rem !important;
+        line-height: 1.25 !important;
       }
 
-      /* ---- Sub Tabs Admin di HP ---- */
+      /* Sub Tabs Navigasi Admin di HP (Bisa Swipe/Scroll Halus) */
       .admin-sub-tabs {
-        gap: 6px;
-        margin-bottom: 1rem;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 0.6rem;
-        flex-wrap: nowrap;
-        scrollbar-width: none;
-      }
-      .admin-sub-tabs::-webkit-scrollbar {
-        display: none;
-      }
-      .sub-tab {
-        padding: 7px 10px;
-        font-size: 0.72rem;
-        white-space: nowrap;
-        flex-shrink: 0;
-        gap: 4px;
-        border-radius: 8px;
-      }
-      .sub-tab i {
-        font-size: 0.7rem;
-      }
-      .sub-tab .badge {
-        font-size: 0.62rem;
-        padding: 1px 5px;
+        display: flex !important;
+        gap: 6px !important;
+        margin-bottom: 1rem !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 6px !important;
+        flex-wrap: nowrap !important;
+        scrollbar-width: none !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
 
-      /* ---- Panel Headers di HP ---- */
+      .admin-sub-tabs::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      .sub-tab {
+        padding: 7px 11px !important;
+        font-size: 0.74rem !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        gap: 4px !important;
+        border-radius: 8px !important;
+      }
+
+      .sub-tab i {
+        font-size: 0.72rem !important;
+      }
+
+      .sub-tab .badge {
+        font-size: 0.62rem !important;
+        padding: 1px 5px !important;
+      }
+
+      /* Panel Headers di HP */
       .panel-header-simple,
       .panel-header-sub {
-        padding: 0.85rem;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-      }
-      .panel-header-simple h3,
-      .panel-header-sub h3 {
-        font-size: 1rem !important;
-        line-height: 1.35;
-      }
-      .panel-header-simple p,
-      .panel-header-sub p {
-        font-size: 0.78rem !important;
-      }
-      .panel-header-sub .btn {
-        width: 100%;
-        justify-content: center;
+        padding: 0.85rem !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
 
-      /* ---- Search & Filter di HP ---- */
-      .search-filter-bar {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
+      .panel-header-simple h3,
+      .panel-header-sub h3 {
+        font-size: 0.98rem !important;
+        line-height: 1.35 !important;
       }
+
+      .panel-header-simple p,
+      .panel-header-sub p {
+        font-size: 0.76rem !important;
+        line-height: 1.4 !important;
+      }
+
+      .panel-header-sub .btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+
+      /* Search & Filter Bar di HP */
+      .search-filter-bar {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+      }
+
       .search-input-wrap,
       .search-input-wrap input,
       .simple-select {
         width: 100% !important;
+        box-sizing: border-box !important;
       }
+
       .search-input-wrap input {
-        font-size: 0.82rem;
+        font-size: 0.82rem !important;
+        padding: 8px 12px 8px 32px !important;
       }
+
       .simple-select {
-        font-size: 0.82rem;
+        font-size: 0.82rem !important;
+        padding: 8px 10px !important;
       }
 
-      /* ---- Tabel Admin di HP — Horizontal Scroll ---- */
+      /* Tampilkan petunjuk geser tabel di layar HP */
+      .table-swipe-hint {
+        display: flex !important;
+      }
+
+      /* Tabel Admin di HP — Scroll Horizontal Lancar dan Terkunci */
       .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border-radius: 10px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-      }
-      .custom-table {
-        min-width: 620px;
-        font-size: 0.78rem;
-      }
-      .custom-table th {
-        padding: 10px 10px;
-        font-size: 0.72rem;
-        white-space: nowrap;
-      }
-      .custom-table td {
-        padding: 10px 10px;
-      }
-      .student-badge-card {
-        gap: 6px;
-      }
-      .student-avatar {
-        width: 30px;
-        height: 30px;
-        font-size: 0.75rem;
-      }
-      .student-info-name {
-        font-size: 0.8rem;
-      }
-      .student-info-class {
-        font-size: 0.65rem;
-      }
-      .student-info-nim {
-        font-size: 0.7rem;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 10px !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+        margin-bottom: 1.25rem !important;
       }
 
-      /* ---- SQL Console di HP ---- */
+      .custom-table {
+        min-width: 660px !important;
+        font-size: 0.76rem !important;
+      }
+
+      .custom-table th {
+        padding: 9px 10px !important;
+        font-size: 0.72rem !important;
+        white-space: nowrap !important;
+      }
+
+      .custom-table td {
+        padding: 9px 10px !important;
+      }
+
+      .student-badge-card {
+        gap: 6px !important;
+      }
+
+      .student-avatar {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.75rem !important;
+      }
+
+      .student-info-name {
+        font-size: 0.8rem !important;
+      }
+
+      .student-info-class {
+        font-size: 0.65rem !important;
+      }
+
+      .student-info-nim {
+        font-size: 0.7rem !important;
+      }
+
+      /* SQL Console di HP */
       #admin-sub-sql .glass-card {
         padding: 0.85rem !important;
       }
+
       #sql-input-query {
-        font-size: 0.82rem !important;
+        font-size: 0.8rem !important;
         padding: 10px !important;
-        min-height: 80px;
-      }
-      #admin-sub-sql .btn-outline.btn-sm {
-        font-size: 0.68rem;
-        padding: 4px 7px;
-      }
-      #sql-result-container {
-        max-height: 320px;
+        min-height: 80px !important;
       }
 
-      /* ---- Modal di HP (Admin) ---- */
+      #admin-sub-sql .btn-outline.btn-sm {
+        font-size: 0.68rem !important;
+        padding: 4px 7px !important;
+      }
+
+      #sql-result-container {
+        max-height: 320px !important;
+      }
+
+      /* Modal Admin di HP */
       .modal-box {
         width: 95% !important;
         max-width: 95% !important;
-        margin: 8px auto;
-        padding: 1rem;
-        max-height: 93vh;
-        border-radius: 14px;
-        overflow-y: auto;
-      }
-      .modal-header h3 {
-        font-size: 0.95rem;
+        margin: 8px auto !important;
+        padding: 1rem !important;
+        max-height: 93vh !important;
+        border-radius: 14px !important;
+        overflow-y: auto !important;
+        box-sizing: border-box !important;
       }
 
-      /* ---- Main Wrapper di HP ---- */
-      .main-wrapper {
-        padding: 0.85rem 0.65rem 2.5rem 0.65rem;
+      .modal-header h3 {
+        font-size: 0.95rem !important;
       }
     }
   </style>
@@ -522,11 +681,6 @@
         <i class="fa-solid fa-shield-halved"></i>
         <span id="admin-header-name">Admin Sarpras FST (Pakdul)</span>
       </div>
-
-      <a href="index.html" class="btn btn-outline btn-sm" style="color:#ffffff; border-color:rgba(255,255,255,0.25);"
-        title="Buka Tampilan Katalog Mahasiswa">
-        <i class="fa-solid fa-graduation-cap"></i> Mode Mahasiswa
-      </a>
 
       <button class="btn btn-danger btn-sm" id="btn-admin-logout" onclick="logoutAdmin()">
         <i class="fa-solid fa-right-from-bracket"></i> Keluar
@@ -634,8 +788,10 @@
         </div>
       </div>
 
-      <div class="table-container glass-card"
-        style="box-shadow: 0 4px 20px rgba(0,0,0,0.04); border-radius:12px; overflow:hidden;">
+      <div class="table-swipe-hint">
+        <i class="fa-solid fa-arrows-left-right"></i> Geser tabel ke kanan untuk melihat rincian & tombol tindakan
+      </div>
+      <div class="table-container glass-card">
         <table class="custom-table" id="admin-requests-table">
           <thead>
             <tr>
@@ -667,6 +823,9 @@
         </button>
       </div>
 
+      <div class="table-swipe-hint">
+        <i class="fa-solid fa-arrows-left-right"></i> Geser tabel ke kanan untuk melihat rincian & aksi
+      </div>
       <div class="table-container glass-card">
         <table class="custom-table" id="admin-stock-table">
           <thead>
@@ -696,6 +855,9 @@
             UINSU.</p>
         </div>
       </div>
+      <div class="table-swipe-hint">
+        <i class="fa-solid fa-arrows-left-right"></i> Geser tabel ke kanan untuk melihat rincian mahasiswa
+      </div>
       <div class="table-container glass-card">
         <table class="custom-table" id="admin-students-table">
           <thead>
@@ -723,6 +885,9 @@
           <h3>Riwayat Log Transaksi & Arsip ACC</h3>
           <p class="text-muted">Semua arsip permohonan yang disetujui, ditolak, dan dikembalikan.</p>
         </div>
+      </div>
+      <div class="table-swipe-hint">
+        <i class="fa-solid fa-arrows-left-right"></i> Geser tabel ke kanan untuk melihat rincian arsip
       </div>
       <div class="table-container glass-card">
         <table class="custom-table" id="admin-logs-table">
