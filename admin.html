@@ -233,41 +233,264 @@
       padding: 8px 12px;
     }
 
-    @media (max-width: 640px) {
+    /* ==========================================================
+       RESPONSIVE ADMIN — TAMPILAN HANDPHONE (≤ 640px)
+       ========================================================== */
+    @media (max-width: 900px) {
       .admin-simple-banner {
-        padding: 1.25rem 1rem;
+        padding: 1.25rem 1.15rem;
         flex-direction: column;
         align-items: stretch;
+        gap: 1rem;
+      }
+      .admin-banner-actions {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .admin-banner-actions .btn {
+        flex: 1;
+        min-width: 140px;
+        justify-content: center;
+      }
+      .admin-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      /* ---- Navbar Admin di HP ---- */
+      .admin-navbar {
+        padding: 0.75rem 0.85rem;
+        gap: 0.6rem;
+      }
+      .admin-navbar .nav-brand {
+        gap: 8px;
+      }
+      .admin-navbar .brand-uinsu-logo {
+        width: 32px;
+        height: 32px;
+      }
+      .admin-navbar .brand-title {
+        font-size: 0.82rem;
+      }
+      .admin-navbar .brand-sub {
+        font-size: 0.62rem;
+      }
+      .admin-navbar .nav-actions {
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .admin-badge-pill {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        gap: 4px;
+      }
+      .admin-navbar .nav-actions .btn {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+      }
+
+      /* ---- Banner Admin di HP ---- */
+      .admin-simple-banner {
+        padding: 1rem 0.85rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+        border-radius: 12px;
+        margin-bottom: 1.25rem;
+      }
+      .admin-badge-tag {
+        font-size: 0.68rem;
+        padding: 3px 8px;
       }
       .admin-banner-info h2 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+        line-height: 1.3;
       }
       .admin-banner-info p {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
+        line-height: 1.4;
       }
       .admin-banner-actions {
         width: 100%;
         display: flex;
         flex-direction: column;
+        gap: 6px;
       }
       .admin-banner-actions .btn {
         width: 100%;
         justify-content: center;
+        padding: 10px;
+        font-size: 0.82rem;
       }
-      .panel-header-simple {
-        padding: 1rem;
+
+      /* ---- Metrics Grid (4 Kartu Statistik) di HP ---- */
+      .admin-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+        margin-bottom: 1.25rem;
+      }
+      .metric-card {
+        padding: 0.85rem 0.75rem;
+        gap: 0.65rem;
+        border-radius: 12px;
+      }
+      .metric-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 1.1rem;
+      }
+      .metric-val {
+        font-size: 1.35rem;
+      }
+      .metric-title {
+        font-size: 0.68rem;
+      }
+
+      /* ---- Sub Tabs Admin di HP ---- */
+      .admin-sub-tabs {
+        gap: 6px;
+        margin-bottom: 1rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.6rem;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+      }
+      .admin-sub-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .sub-tab {
+        padding: 7px 10px;
+        font-size: 0.72rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        gap: 4px;
+        border-radius: 8px;
+      }
+      .sub-tab i {
+        font-size: 0.7rem;
+      }
+      .sub-tab .badge {
+        font-size: 0.62rem;
+        padding: 1px 5px;
+      }
+
+      /* ---- Panel Headers di HP ---- */
+      .panel-header-simple,
+      .panel-header-sub {
+        padding: 0.85rem;
         flex-direction: column;
         align-items: stretch;
+        gap: 0.75rem;
       }
+      .panel-header-simple h3,
+      .panel-header-sub h3 {
+        font-size: 1rem !important;
+        line-height: 1.35;
+      }
+      .panel-header-simple p,
+      .panel-header-sub p {
+        font-size: 0.78rem !important;
+      }
+      .panel-header-sub .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* ---- Search & Filter di HP ---- */
       .search-filter-bar {
         width: 100%;
         flex-direction: column;
         align-items: stretch;
+        gap: 8px;
       }
       .search-input-wrap,
       .search-input-wrap input,
       .simple-select {
         width: 100% !important;
+      }
+      .search-input-wrap input {
+        font-size: 0.82rem;
+      }
+      .simple-select {
+        font-size: 0.82rem;
+      }
+
+      /* ---- Tabel Admin di HP — Horizontal Scroll ---- */
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      .custom-table {
+        min-width: 620px;
+        font-size: 0.78rem;
+      }
+      .custom-table th {
+        padding: 10px 10px;
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+      .custom-table td {
+        padding: 10px 10px;
+      }
+      .student-badge-card {
+        gap: 6px;
+      }
+      .student-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+      }
+      .student-info-name {
+        font-size: 0.8rem;
+      }
+      .student-info-class {
+        font-size: 0.65rem;
+      }
+      .student-info-nim {
+        font-size: 0.7rem;
+      }
+
+      /* ---- SQL Console di HP ---- */
+      #admin-sub-sql .glass-card {
+        padding: 0.85rem !important;
+      }
+      #sql-input-query {
+        font-size: 0.82rem !important;
+        padding: 10px !important;
+        min-height: 80px;
+      }
+      #admin-sub-sql .btn-outline.btn-sm {
+        font-size: 0.68rem;
+        padding: 4px 7px;
+      }
+      #sql-result-container {
+        max-height: 320px;
+      }
+
+      /* ---- Modal di HP (Admin) ---- */
+      .modal-box {
+        width: 95% !important;
+        max-width: 95% !important;
+        margin: 8px auto;
+        padding: 1rem;
+        max-height: 93vh;
+        border-radius: 14px;
+        overflow-y: auto;
+      }
+      .modal-header h3 {
+        font-size: 0.95rem;
+      }
+
+      /* ---- Main Wrapper di HP ---- */
+      .main-wrapper {
+        padding: 0.85rem 0.65rem 2.5rem 0.65rem;
       }
     }
   </style>
