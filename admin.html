@@ -435,82 +435,82 @@
         white-space: nowrap !important;
       }
 
-      /* Metrics Grid (4 Kartu Statistik) Rapi 2 Kolom di HP */
+      /* Metrics Grid (4 Kartu Statistik) Ringkas & Rapi di HP */
       .admin-metrics-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 0.65rem !important;
-        margin-bottom: 1.15rem !important;
+        gap: 0.5rem !important;
+        margin-bottom: 0.85rem !important;
         width: 100% !important;
         box-sizing: border-box !important;
       }
 
       .metric-card {
-        padding: 0.75rem 0.65rem !important;
-        gap: 0.55rem !important;
-        border-radius: 10px !important;
+        padding: 0.55rem 0.65rem !important;
+        gap: 0.5rem !important;
+        border-radius: 9px !important;
         width: 100% !important;
         box-sizing: border-box !important;
         min-width: 0 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+        border: 1px solid #e2e8f0 !important;
+        align-items: center !important;
       }
 
       .metric-icon {
-        width: 36px !important;
-        height: 36px !important;
-        border-radius: 9px !important;
-        font-size: 1.05rem !important;
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+        font-size: 0.92rem !important;
         flex-shrink: 0 !important;
       }
 
       .metric-val {
-        font-size: 1.3rem !important;
-        line-height: 1.1 !important;
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        line-height: 1 !important;
+        margin-bottom: 2px !important;
       }
 
       .metric-title {
-        font-size: 0.68rem !important;
-        line-height: 1.25 !important;
+        font-size: 0.64rem !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        color: #64748b !important;
       }
 
-      /* Sub Tabs Navigasi Admin di HP (Bisa Swipe/Scroll Halus) */
+      /* Sub Tabs Navigasi Admin di HP (Semua Menu Langsung Terlihat & Mudah Diklik) */
       .admin-sub-tabs {
         display: flex !important;
+        flex-wrap: wrap !important;
         gap: 6px !important;
         margin-bottom: 1rem !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-x !important;
-        padding-bottom: 8px !important;
-        flex-wrap: nowrap !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        cursor: grab;
-      }
-
-      .admin-sub-tabs::-webkit-scrollbar {
-        height: 4px !important;
-        display: block !important;
-      }
-      .admin-sub-tabs::-webkit-scrollbar-track {
-        background: #f1f5f9 !important;
-        border-radius: 4px !important;
-      }
-      .admin-sub-tabs::-webkit-scrollbar-thumb {
-        background: #10b981 !important;
-        border-radius: 4px !important;
+        overflow: visible !important;
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
       }
 
       .sub-tab {
-        padding: 8px 13px !important;
-        font-size: 0.76rem !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-        gap: 5px !important;
+        flex: 1 1 calc(50% - 6px) !important;
+        max-width: calc(50% - 3px) !important;
+        padding: 8px 6px !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        white-space: normal !important;
+        text-align: center !important;
+        justify-content: center !important;
         border-radius: 8px !important;
-        touch-action: pan-x !important;
-        user-select: none !important;
-        -webkit-user-select: none !important;
+        background: #ffffff !important;
+        border: 1px solid var(--border-light) !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+        gap: 5px !important;
+      }
+
+      .sub-tab:last-child {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
       }
 
       .sub-tab i {
@@ -519,7 +519,7 @@
       }
 
       .sub-tab .badge {
-        font-size: 0.62rem !important;
+        font-size: 0.6rem !important;
         padding: 1px 5px !important;
       }
 
