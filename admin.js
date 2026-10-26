@@ -190,8 +190,10 @@ function logoutAdmin() {
   }, 600);
 }
 
-// Sub-Tabs Switching
+// Sub-Tabs Switching & Swipe Gestures
 const adminSubTabs = document.querySelectorAll('.sub-tab');
+const subTabsContainer = document.querySelector('.admin-sub-tabs');
+
 adminSubTabs.forEach(sub => {
   sub.addEventListener('click', () => {
     adminSubTabs.forEach(s => s.classList.remove('active'));
@@ -200,8 +202,31 @@ adminSubTabs.forEach(sub => {
     document.querySelectorAll('.admin-sub-panel').forEach(panel => {
       panel.classList.toggle('active', panel.id === sub.dataset.sub);
     });
+
+    // Otomatis geser tab yang diklik agar tampak utuh di layar
+    try {
+      sub.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } catch (e) {
+      // Fallback
+    }
   });
 });
+
+// Gesture Drag / Swipe Touch di Handphone untuk Navigasi Sub-Tab
+if (subTabsContainer) {
+  let touchStartX = 0;
+  let touchStartScroll = 0;
+
+  subTabsContainer.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartScroll = subTabsContainer.scrollLeft;
+  }, { passive: true });
+
+  subTabsContainer.addEventListener('touchmove', (e) => {
+    const deltaX = touchStartX - e.touches[0].clientX;
+    subTabsContainer.scrollLeft = touchStartScroll + deltaX;
+  }, { passive: true });
+}
 
 // Render Main Admin Dashboard
 function renderAdminDashboard() {

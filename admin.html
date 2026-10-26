@@ -478,29 +478,44 @@
         gap: 6px !important;
         margin-bottom: 1rem !important;
         overflow-x: auto !important;
+        overflow-y: hidden !important;
         -webkit-overflow-scrolling: touch !important;
-        padding-bottom: 6px !important;
+        touch-action: pan-x !important;
+        padding-bottom: 8px !important;
         flex-wrap: nowrap !important;
-        scrollbar-width: none !important;
         width: 100% !important;
         box-sizing: border-box !important;
+        cursor: grab;
       }
 
       .admin-sub-tabs::-webkit-scrollbar {
-        display: none !important;
+        height: 4px !important;
+        display: block !important;
+      }
+      .admin-sub-tabs::-webkit-scrollbar-track {
+        background: #f1f5f9 !important;
+        border-radius: 4px !important;
+      }
+      .admin-sub-tabs::-webkit-scrollbar-thumb {
+        background: #10b981 !important;
+        border-radius: 4px !important;
       }
 
       .sub-tab {
-        padding: 7px 11px !important;
-        font-size: 0.74rem !important;
+        padding: 8px 13px !important;
+        font-size: 0.76rem !important;
         white-space: nowrap !important;
         flex-shrink: 0 !important;
-        gap: 4px !important;
+        gap: 5px !important;
         border-radius: 8px !important;
+        touch-action: pan-x !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
       }
 
       .sub-tab i {
-        font-size: 0.72rem !important;
+        font-size: 0.74rem !important;
+        pointer-events: none;
       }
 
       .sub-tab .badge {
@@ -757,7 +772,7 @@
       <button class="sub-tab" data-sub="admin-sub-reports">
         <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Selesai
       </button>
-      <button class="sub-tab" data-sub="admin-sub-sql" style="margin-left:auto;">
+      <button class="sub-tab" data-sub="admin-sub-sql">
         <i class="fa-solid fa-terminal"></i> Database SQL
       </button>
     </div>
