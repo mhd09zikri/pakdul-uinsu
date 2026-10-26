@@ -123,6 +123,22 @@
       box-sizing: border-box;
     }
 
+    .metric-card {
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+      user-select: none;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-3px);
+      border-color: #059669 !important;
+      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.15) !important;
+    }
+
+    .metric-card:active {
+      transform: scale(0.97);
+    }
+
     /* Header for Simple Table Panel */
     .panel-header-simple {
       display: flex;
@@ -700,30 +716,30 @@
       </div>
     </div>
 
-    <!-- Admin Metrics Grid -->
+    <!-- Admin Metrics Grid (Dapat Ditekan untuk Filter / Lihat Data) -->
     <div class="admin-metrics-grid">
-      <div class="metric-card glass-card">
+      <div class="metric-card glass-card" onclick="filterByMetric('pending')" role="button" tabindex="0" title="Klik untuk langsung melihat permohonan Menunggu ACC">
         <div class="metric-icon bg-blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
         <div class="metric-info">
           <span class="metric-val" id="adm-count-pending">0</span>
           <span class="metric-title">Menunggu ACC</span>
         </div>
       </div>
-      <div class="metric-card glass-card">
+      <div class="metric-card glass-card" onclick="filterByMetric('approved')" role="button" tabindex="0" title="Klik untuk langsung melihat alat yang Sedang Dipinjam">
         <div class="metric-icon bg-green"><i class="fa-solid fa-hand-holding-hand"></i></div>
         <div class="metric-info">
           <span class="metric-val" id="adm-count-active">0</span>
           <span class="metric-title">Sedang Dipinjam</span>
         </div>
       </div>
-      <div class="metric-card glass-card">
+      <div class="metric-card glass-card" onclick="filterByMetric('returned')" role="button" tabindex="0" title="Klik untuk langsung melihat alat yang Selesai Dikembalikan">
         <div class="metric-icon bg-purple"><i class="fa-solid fa-circle-check"></i></div>
         <div class="metric-info">
           <span class="metric-val" id="adm-count-done">0</span>
           <span class="metric-title">Selesai Dikembalikan</span>
         </div>
       </div>
-      <div class="metric-card glass-card">
+      <div class="metric-card glass-card" onclick="filterByMetric('inventory')" role="button" tabindex="0" title="Klik untuk langsung melihat rincian Stok Alat Kampus">
         <div class="metric-icon bg-yellow"><i class="fa-solid fa-boxes-stacked"></i></div>
         <div class="metric-info">
           <span class="metric-val" id="adm-count-total-stock">0</span>

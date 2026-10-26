@@ -228,6 +228,34 @@ if (subTabsContainer) {
   }, { passive: true });
 }
 
+// Filter & Buka Tab Langsung Saat Kartu Statistik Ditekan
+function filterByMetric(type) {
+  if (type === 'inventory') {
+    // Buka Tab Stok Alat Kampus
+    const invTab = document.querySelector('.sub-tab[data-sub="admin-sub-inventory"]');
+    if (invTab) invTab.click();
+    const targetSection = document.getElementById('admin-sub-inventory');
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  } else {
+    // Buka Tab Permohonan Booking Mahasiswa
+    const reqTab = document.querySelector('.sub-tab[data-sub="admin-sub-requests"]');
+    if (reqTab) reqTab.click();
+
+    // Atur Filter Status ke status yang diklik
+    const statusFilter = document.getElementById('admin-status-filter');
+    if (statusFilter) {
+      statusFilter.value = type;
+      filterAdminLoans();
+    }
+    const targetSection = document.getElementById('admin-sub-requests');
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
 // Render Main Admin Dashboard
 function renderAdminDashboard() {
   // Metrics
