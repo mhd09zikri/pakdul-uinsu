@@ -1506,7 +1506,7 @@ body::before {
 }
 
 /* ============================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (MOBILE & HANDPHONE OPTIMIZATION)
 ============================================================ */
 @media (max-width: 900px) {
   .hero-banner {
@@ -1526,5 +1526,271 @@ body::before {
   }
   .form-row {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Khusus Tampilan Handphone (Lebar Layar <= 640px) */
+@media (max-width: 640px) {
+  body {
+    font-size: 0.92rem;
+  }
+
+  .navbar {
+    padding: 0.85rem 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .nav-brand {
+    justify-content: flex-start;
+  }
+
+  .brand-uinsu-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .brand-title {
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+
+  .brand-sub {
+    font-size: 0.68rem;
+  }
+
+  .nav-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nav-actions .btn {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+
+  .user-pill {
+    padding: 4px 10px;
+    font-size: 0.76rem;
+  }
+
+  .main-wrapper {
+    padding: 1rem 0.85rem 3rem 0.85rem;
+  }
+
+  /* Nav Tabs */
+  .nav-tabs {
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-tab {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Hero Banner di HP */
+  .hero-banner {
+    padding: 1.5rem 1.15rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .hero-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  .hero-title {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 0.6rem 0;
+  }
+
+  .hero-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .stat-item .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.72rem;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .hero-illustration {
+    display: none; /* Sembunyikan elemen dekoratif melayang agar layar HP tidak penuh */
+  }
+
+  /* Filter Bar & Pencarian */
+  .filter-bar {
+    padding: 1rem 0.85rem;
+    gap: 0.85rem;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    font-size: 0.85rem;
+    padding: 8px 12px 8px 34px;
+  }
+
+  .category-pills {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+
+  .category-pills .pill {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Grid Kartu Alat di HP */
+  .items-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .equipment-card {
+    border-radius: var(--radius-md);
+  }
+
+  .card-top {
+    height: 150px;
+  }
+
+  .item-visual-icon {
+    font-size: 3.2rem;
+  }
+
+  .card-body {
+    padding: 1.15rem;
+  }
+
+  .item-title {
+    font-size: 1.15rem;
+  }
+
+  .meta-row {
+    font-size: 0.8rem;
+  }
+
+  /* Modal Form Booking & Tiket di HP */
+  .modal-box {
+    width: 95% !important;
+    max-width: 95% !important;
+    margin: 10px auto;
+    padding: 1.15rem;
+    max-height: 92vh;
+    border-radius: var(--radius-md);
+    overflow-y: auto;
+  }
+
+  .modal-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input, 
+  .form-group select, 
+  .form-group textarea {
+    font-size: 0.88rem;
+    padding: 9px 11px;
+  }
+
+  .modal-footer-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .modal-footer-actions .btn {
+    width: 100%;
+    padding: 11px;
+    font-size: 0.88rem;
+  }
+
+  /* Tiket Digital di Layar HP */
+  .ticket-container {
+    padding: 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .ticket-details {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .qr-code-box {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Tabel Riwayat di HP: Scroll Horizontal Lancar */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .custom-table {
+    min-width: 580px;
+    font-size: 0.8rem;
+  }
+
+  .custom-table th, 
+  .custom-table td {
+    padding: 10px 12px;
+  }
+
+  /* Footer di HP */
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
   }
 }

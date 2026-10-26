@@ -78,12 +78,9 @@ ON DUPLICATE KEY UPDATE `nama_lengkap` = VALUES(`nama_lengkap`);
 
 -- 2. Fasilitas Inventaris
 INSERT INTO `fasilitas` (`id`, `nama_barang`, `kategori`, `spesifikasi`, `total_stok`, `tersedia_stok`, `lokasi_penyimpanan`, `kondisi`, `icon_class`) VALUES
-('hdmi-01', 'Kabel HDMI 2.1 Ultra High Speed (5 Meter)', 'hdmi', 'Support 4K@120Hz / 8K@60Hz, Braided Nylon anti-kusut, Gold-Plated Connector', 6, 4, 'Lab Jaringan & Komputer FST, Kampus IV Tuntungan', 'Sangat Baik', 'fa-network-wired'),
-('hdmi-02', 'Kabel HDMI to Type-C Thunderbolt (2 Meter)', 'hdmi', 'Plug-and-play untuk MacBook & Laptop Modern, transmisi 4K 60Hz stabil', 4, 3, 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan', 'Normal', 'fa-cable-car'),
-('proj-01', 'Proyektor Epson EB-X51 XGA 3LCD Lumens', 'proyektor', '3,800 ANSI Lumens, Kontras 16.000:1, Dilengkapi remote, kabel power & tas portable', 4, 2, 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan', 'Optimal / Lensa Bersih', 'fa-video'),
-('proj-02', 'Proyektor Mini Portable Anker Nebula DLP', 'proyektor', 'Dilengkapi baterai cadangan & speaker stereo, ideal untuk seminar ruang seminar FST', 2, 1, 'Ruang Riset Mahasiswa FST, Kampus IV Tuntungan', 'Sangat Baik', 'fa-film'),
-('cok-01', 'Cok Sambung / Roll Kabel Uticon 4 Lubang (10 Meter)', 'coksambung', 'Panjang 10M, Switch On/Off per lubang, Arde Kuningan pengaman korsleting, max 2500W', 6, 4, 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan', 'Layak Pakai', 'fa-plug-circle-bolt'),
-('cok-02', 'Cok Sambung Heavy-Duty Broco 6 Lubang (5 Meter)', 'coksambung', 'Kabel tebal SNI, Dilengkapi surge protector untuk keamanan proyektor & laptop', 5, 3, 'Lab Fisika & Elektronika FST, Kampus IV Tuntungan', 'Sangat Baik', 'fa-bolt')
+('proj-01', 'Proyektor', 'proyektor', 'Lengkap dengan kabel power, kabel VGA/HDMI, dan remote', 10, 10, 'Ruangan Administrasi FST', 'Optimal / Sangat Baik', 'fa-video'),
+('hdmi-01', 'Kabel HDMI', 'hdmi', 'Kabel penghubung proyektor ke laptop', 10, 10, 'Ruangan Administrasi FST', 'Sangat Baik', 'fa-network-wired'),
+('cok-01', 'Cok Sambung', 'coksambung', 'Stop kontak / roll kabel untuk kebutuhan listrik di kelas', 10, 10, 'Ruangan Administrasi FST', 'Layak Pakai', 'fa-plug-circle-bolt')
 ON DUPLICATE KEY UPDATE `nama_barang` = VALUES(`nama_barang`);
 
 -- 3. Transaksi Peminjaman Sampel

@@ -1078,26 +1078,40 @@ body::after {
    ============================================================ */
 @media (max-width: 480px) {
   .ig-card {
-    padding: 28px 24px;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 24px 18px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    margin: 0 12px;
   }
 
   .ig-card-switch {
-    padding: 16px 24px;
+    padding: 14px 18px;
+    margin: 0 12px;
+    border-radius: 14px;
   }
 
   .ig-auth-container {
-    padding: 20px 0;
+    padding: 16px 0;
   }
 
   .ig-form-side {
     max-width: 100%;
+    width: 100%;
   }
 
   .ig-brand-name {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
+  }
+
+  .ig-brand-logo-wrap {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 10px;
+  }
+
+  .ig-auth-tab-btn {
+    font-size: 0.75rem;
+    padding: 8px 6px;
   }
 
   .ig-footer-links {

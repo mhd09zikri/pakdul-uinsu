@@ -4,7 +4,7 @@
 // ============================================================
 
 // DATA VERSION — must match script.js
-const DATA_VERSION = 'v3_stock10';
+const DATA_VERSION = 'v6_lokasi_administrasi';
 
 // State verification
 let currentUser = JSON.parse(localStorage.getItem('uinsu_user')) || null;
@@ -24,85 +24,46 @@ if (!checkAdminAuth()) {
   throw new Error('Unauthorized');
 }
 
-// Default items — all 10 units
+// Default items — 3 Fasilitas Utama Sederhana
 const DEFAULT_ITEMS = [
   {
-    id: 'hdmi-01',
-    name: 'Kabel HDMI 2.1 Ultra High Speed (5 Meter)',
-    category: 'hdmi',
-    specs: 'Support 4K@120Hz / 8K@60Hz, Braided Nylon anti-kusut, Gold-Plated Connector',
+    id: 'proj-01',
+    name: 'Proyektor',
+    category: 'proyektor',
+    specs: 'Lengkap dengan kabel power, kabel VGA/HDMI, dan remote',
     totalStock: 10,
     availableStock: 10,
-    location: 'Lab Jaringan & Komputer FST, Kampus IV Tuntungan',
+    location: 'Ruangan Administrasi FST',
+    icon: 'fa-video',
+    colorClass: 'badge-proyektor',
+    iconColor: '#f472b6',
+    condition: 'Optimal / Sangat Baik'
+  },
+  {
+    id: 'hdmi-01',
+    name: 'Kabel HDMI',
+    category: 'hdmi',
+    specs: 'Kabel penghubung proyektor ke laptop',
+    totalStock: 10,
+    availableStock: 10,
+    location: 'Ruangan Administrasi FST',
     icon: 'fa-network-wired',
     colorClass: 'badge-hdmi',
     iconColor: '#818cf8',
     condition: 'Sangat Baik'
   },
   {
-    id: 'hdmi-02',
-    name: 'Kabel HDMI to Type-C Thunderbolt (2 Meter)',
-    category: 'hdmi',
-    specs: 'Plug-and-play untuk MacBook & Laptop Modern, transmisi 4K 60Hz stabil',
-    totalStock: 10,
-    availableStock: 10,
-    location: 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan',
-    icon: 'fa-cable-car',
-    colorClass: 'badge-hdmi',
-    iconColor: '#a5b4fc',
-    condition: 'Normal'
-  },
-  {
-    id: 'proj-01',
-    name: 'Proyektor Epson EB-X51 XGA 3LCD Lumens',
-    category: 'proyektor',
-    specs: '3,800 ANSI Lumens, Kontras 16.000:1, Dilengkapi remote, kabel power & tas portable',
-    totalStock: 10,
-    availableStock: 10,
-    location: 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan',
-    icon: 'fa-video',
-    colorClass: 'badge-proyektor',
-    iconColor: '#f472b6',
-    condition: 'Optimal / Lensa Bersih'
-  },
-  {
-    id: 'proj-02',
-    name: 'Proyektor Mini Portable Anker Nebula DLP',
-    category: 'proyektor',
-    specs: 'Dilengkapi baterai cadangan & speaker stereo, ideal untuk seminar ruang seminar FST',
-    totalStock: 10,
-    availableStock: 10,
-    location: 'Ruang Riset Mahasiswa FST, Kampus IV Tuntungan',
-    icon: 'fa-film',
-    colorClass: 'badge-proyektor',
-    iconColor: '#f43f5e',
-    condition: 'Sangat Baik'
-  },
-  {
     id: 'cok-01',
-    name: 'Cok Sambung / Roll Kabel Uticon 4 Lubang (10 Meter)',
+    name: 'Cok Sambung',
     category: 'coksambung',
-    specs: 'Panjang 10M, Switch On/Off per lubang, Arde Kuningan pengaman korsleting, max 2500W',
+    specs: 'Stop kontak / roll kabel untuk kebutuhan listrik di kelas',
     totalStock: 10,
     availableStock: 10,
-    location: 'Pos Sarpras FST Lt. 1, Kampus IV Tuntungan',
+    location: 'Ruangan Administrasi FST',
     icon: 'fa-plug-circle-bolt',
     colorClass: 'badge-coksambung',
     iconColor: '#fbbf24',
     condition: 'Layak Pakai'
-  },
-  {
-    id: 'cok-02',
-    name: 'Cok Sambung Heavy-Duty Broco 6 Lubang (5 Meter)',
-    category: 'coksambung',
-    specs: 'Kabel tebal SNI, Dilengkapi surge protector untuk keamanan proyektor & laptop',
-    totalStock: 10,
-    availableStock: 10,
-    location: 'Lab Fisika & Elektronika FST, Kampus IV Tuntungan',
-    icon: 'fa-bolt',
-    colorClass: 'badge-coksambung',
-    iconColor: '#f59e0b',
-    condition: 'Sangat Baik'
   }
 ];
 
@@ -110,7 +71,7 @@ const DEFAULT_LOANS = [
   {
     id: 'BOOK-FST-001',
     itemId: 'proj-01',
-    itemName: 'Proyektor Epson EB-X51 XGA 3LCD Lumens',
+    itemName: 'Proyektor',
     studentName: 'Ahmad Farhan',
     studentNim: '0701222012',
     studentClass: 'ILKOM-1',
@@ -123,13 +84,13 @@ const DEFAULT_LOANS = [
     purpose: 'Perkuliahan & Presentasi Kelas',
     notes: 'Kebutuhan presentasi materi Jaringan Komputer',
     status: 'approved',
-    adminNote: 'Disetujui oleh Admin Sarpras FST (Pakdul). Silakan ambil di Pos Sarpras.',
+    adminNote: 'Disetujui oleh Admin Sarpras FST (Pakdul). Silakan ambil di Ruangan Administrasi FST.',
     createdAt: '2026-10-13T08:15'
   },
   {
     id: 'BOOK-FST-002',
     itemId: 'hdmi-01',
-    itemName: 'Kabel HDMI 2.1 Ultra High Speed (5 Meter)',
+    itemName: 'Kabel HDMI',
     studentName: 'Ahmad Farhan',
     studentNim: '0701222012',
     studentClass: 'ILKOM-1',
@@ -148,7 +109,7 @@ const DEFAULT_LOANS = [
   {
     id: 'BOOK-FST-003',
     itemId: 'cok-01',
-    itemName: 'Cok Sambung / Roll Kabel Uticon 4 Lubang (10 Meter)',
+    itemName: 'Cok Sambung',
     studentName: 'Siti Nurhaliza',
     studentNim: '0701223088',
     studentClass: 'ILKOM-2',
@@ -633,7 +594,7 @@ document.getElementById('inventory-form').addEventListener('submit', (e) => {
     specs: document.getElementById('inv-specs').value.trim() || 'Spesifikasi standar sarana perkuliahan FST.',
     totalStock: stock,
     availableStock: stock,
-    location: document.getElementById('inv-location').value.trim() || 'Pos Sarpras FST Lt. 1',
+    location: document.getElementById('inv-location').value.trim() || 'Ruangan Administrasi FST',
     icon: icon,
     colorClass: colorClass,
     iconColor: iconColor,
