@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Sarana Peminjaman Alat Kampus | FST UINSU</title>
+  <meta name="description" content="Dashboard Khusus Administrator Sarana Peminjaman Alat Kampus - Fakultas Sains & Teknologi Kampus IV Tuntungan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styling Khusus Khusus Halaman Admin */
+    .admin-navbar {
+      background: #0f172a;
+      border-bottom: 2px solid #059669;
+      color: #ffffff;
+    }
+    .admin-navbar .brand-title {
+      color: #ffffff;
+    }
+    .admin-navbar .brand-sub {
+      color: #94a3b8;
+    }
+    .admin-badge-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Clean & Simple Admin Hero Banner */
+    .admin-simple-banner {
+      background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+      color: #ffffff;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .admin-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .admin-banner-info h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .admin-banner-info p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      max-width: 620px;
+      margin: 0;
+    }
+    .admin-banner-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Header for Simple Table Panel */
+    .panel-header-simple {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      background: #ffffff;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+    .search-filter-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input-wrap i {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .search-input-wrap input {
+      padding: 8px 12px 8px 34px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      width: 250px;
+      background: #f8fafc;
+      outline: none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .search-input-wrap input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+    .simple-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      background: #f8fafc;
+      font-size: 0.88rem;
+      outline: none;
+      font-family: inherit;
+      color: var(--text-secondary);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .simple-select:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    /* Table Enhancements */
+    .custom-table th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 12px 14px;
+      letter-spacing: 0.3px;
+    }
+    .custom-table td {
+      padding: 12px 14px;
+      vertical-align: middle;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .student-badge-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .student-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);
+    }
+    .student-info-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .student-info-class {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      margin-top: 2px;
+    }
+    .student-info-nim {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .item-highlight-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Glow -->
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
+  <div class="glow-bg glow-3"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Top Navigation Bar Admin -->
+  <header class="navbar admin-navbar">
+    <div class="nav-brand">
+      <div class="brand-logo-container">
+        <img src="logo-uinsu.png" alt="Logo UINSU Medan" class="brand-uinsu-logo">
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">SARANA <span class="gradient-text">PEMINJAMAN ALAT</span></span>
+        <span class="brand-sub">Panel Pengelola Fasilitas & Alat FST Kampus IV Tuntungan</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <div class="admin-badge-pill">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span id="admin-header-name">Admin Sarpras FST (Pakdul)</span>
+      </div>
+
+      <a href="index.html" class="btn btn-outline btn-sm" style="color:#ffffff; border-color:rgba(255,255,255,0.25);" title="Buka Tampilan Katalog Mahasiswa">
+        <i class="fa-solid fa-graduation-cap"></i> Mode Mahasiswa
+      </a>
+
+      <button class="btn btn-danger btn-sm" id="btn-admin-logout" onclick="logoutAdmin()">
+        <i class="fa-solid fa-right-from-bracket"></i> Keluar
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <!-- Simple Clean Admin Banner -->
+    <div class="admin-simple-banner">
+      <div class="admin-banner-info">
+        <div class="admin-badge-tag"><i class="fa-solid fa-list-check"></i> Monitoring & Verifikasi Peminjaman Alat Kampus</div>
+        <h2>Data Booking Alat Mahasiswa FST</h2>
+        <p>Pantau langsung mahasiswa yang membooking proyektor, kabel HDMI, cok sambung, dan beri persetujuan (ACC) dengan mudah.</p>
+      </div>
+      <div class="admin-banner-actions">
+        <button class="btn btn-primary" id="btn-quick-add-item">
+          <i class="fa-solid fa-plus-circle"></i> Tambah Unit Alat
+        </button>
+        <button class="btn btn-outline" id="btn-admin-export-csv" style="background:rgba(255,255,255,0.08); color:#ffffff; border-color:rgba(255,255,255,0.3);">
+          <i class="fa-solid fa-file-excel"></i> Unduh Data (.CSV)
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Metrics Grid -->
+    <div class="admin-metrics-grid">
+      <div class="metric-card glass-card">
+        <div class="metric-icon bg-blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="metric-info">
+          <span class="metric-val" id="adm-count-pending">0</span>
+          <span class="metric-title">Menunggu ACC</span>
+        </div>
+      </div>
+      <div class="metric-card glass-card">
+        <div class="metric-icon bg-green"><i class="fa-solid fa-hand-holding-hand"></i></div>
+        <div class="metric-info">
+          <span class="metric-val" id="adm-count-active">0</span>
+          <span class="metric-title">Sedang Dipinjam</span>
+        </div>
+      </div>
+      <div class="metric-card glass-card">
+        <div class="metric-icon bg-purple"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="metric-info">
+          <span class="metric-val" id="adm-count-done">0</span>
+          <span class="metric-title">Selesai Dikembalikan</span>
+        </div>
+      </div>
+      <div class="metric-card glass-card">
+        <div class="metric-icon bg-yellow"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <div class="metric-info">
+          <span class="metric-val" id="adm-count-total-stock">0</span>
+          <span class="metric-title">Total Stok Alat FST</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Sub-Tabs -->
+    <div class="admin-sub-tabs">
+      <button class="sub-tab active" data-sub="admin-sub-requests">
+        <i class="fa-solid fa-users-viewfinder"></i> Daftar Booking Mahasiswa <span class="badge badge-warning" id="pending-tab-badge">0</span>
+      </button>
+      <button class="sub-tab" data-sub="admin-sub-inventory">
+        <i class="fa-solid fa-boxes-stacked"></i> Stok Alat Kampus
+      </button>
+      <button class="sub-tab" data-sub="admin-sub-students">
+        <i class="fa-solid fa-id-card"></i> Data Mahasiswa (<span id="student-count-badge">0</span>)
+      </button>
+      <button class="sub-tab" data-sub="admin-sub-reports">
+        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Selesai
+      </button>
+      <button class="sub-tab" data-sub="admin-sub-sql" style="margin-left:auto;">
+        <i class="fa-solid fa-terminal"></i> Database SQL
+      </button>
+    </div>
+
+    <!-- Sub 1: Requests Management (Daftar Booking Mahasiswa) -->
+    <div id="admin-sub-requests" class="admin-sub-panel active">
+      <div class="panel-header-simple">
+        <div>
+          <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+            <i class="fa-solid fa-clipboard-user text-primary"></i> Mahasiswa yang Membooking Alat Kampus
+          </h3>
+          <p class="text-muted" style="font-size:0.88rem;">Berikut adalah daftar nama mahasiswa, kelas, alat yang dipinjam, beserta status verifikasi.</p>
+        </div>
+        <div class="search-filter-bar">
+          <div class="search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="admin-booking-search" placeholder="Cari nama mahasiswa, NIM, atau alat..." oninput="filterAdminLoans()">
+          </div>
+          <select id="admin-status-filter" onchange="filterAdminLoans()" class="simple-select">
+            <option value="all">Semua Status</option>
+            <option value="pending">Menunggu ACC (Pending)</option>
+            <option value="approved">Sedang Dipinjam (ACC)</option>
+            <option value="returned">Selesai Dikembalikan</option>
+            <option value="rejected">Ditolak</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container glass-card" style="box-shadow: 0 4px 20px rgba(0,0,0,0.04); border-radius:12px; overflow:hidden;">
+        <table class="custom-table" id="admin-requests-table">
+          <thead>
+            <tr>
+              <th style="width:110px;">ID Booking</th>
+              <th>Identitas Mahasiswa</th>
+              <th>Alat yang Dibooking</th>
+              <th>Jadwal Penggunaan</th>
+              <th>Ruangan & Keperluan</th>
+              <th style="text-align:center;">Status</th>
+              <th style="width: 170px; text-align:center;">Tindakan Admin</th>
+            </tr>
+          </thead>
+          <tbody id="admin-requests-body">
+            <!-- Dynamically filled -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sub 2: Inventory Stock Management -->
+    <div id="admin-sub-inventory" class="admin-sub-panel">
+      <div class="panel-header-sub">
+        <div>
+          <h3>Kelola Inventaris Fasilitas FST Kampus IV Tuntungan</h3>
+          <p class="text-muted">Tambah stok unit baru, ubah ketersediaan, perbaiki kondisi barang.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btn-add-item-modal">
+          <i class="fa-solid fa-plus"></i> Tambah Unit Baru
+        </button>
+      </div>
+
+      <div class="table-container glass-card">
+        <table class="custom-table" id="admin-stock-table">
+          <thead>
+            <tr>
+              <th>Kode Unit</th>
+              <th>Nama Barang</th>
+              <th>Kategori</th>
+              <th>Total Stok</th>
+              <th>Tersedia</th>
+              <th>Kondisi</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="admin-stock-body">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sub 3: Mahasiswa Management (Multi Mahasiswa) -->
+    <div id="admin-sub-students" class="admin-sub-panel">
+      <div class="panel-header-sub">
+        <div>
+          <h3>Daftar Akun Mahasiswa Terdaftar (NIM)</h3>
+          <p class="text-muted">Semua mahasiswa yang telah registrasi menggunakan NIM pada sistem peminjaman PAKDUL UINSU.</p>
+        </div>
+      </div>
+      <div class="table-container glass-card">
+        <table class="custom-table" id="admin-students-table">
+          <thead>
+            <tr>
+              <th>NIM Mahasiswa</th>
+              <th>Nama Lengkap</th>
+              <th>Kelas / Rombel</th>
+              <th>Program Studi</th>
+              <th>No. WhatsApp</th>
+              <th>Total Pinjam</th>
+              <th>Status Akun</th>
+            </tr>
+          </thead>
+          <tbody id="admin-students-body">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sub 4: Log Reports -->
+    <div id="admin-sub-reports" class="admin-sub-panel">
+      <div class="panel-header-sub">
+        <div>
+          <h3>Riwayat Log Transaksi & Arsip ACC</h3>
+          <p class="text-muted">Semua arsip permohonan yang disetujui, ditolak, dan dikembalikan.</p>
+        </div>
+      </div>
+      <div class="table-container glass-card">
+        <table class="custom-table" id="admin-logs-table">
+          <thead>
+            <tr>
+              <th>Waktu Log</th>
+              <th>Mahasiswa</th>
+              <th>Fasilitas</th>
+              <th>Status Akhir</th>
+              <th>Catatan Admin</th>
+            </tr>
+          </thead>
+          <tbody id="admin-logs-body">
+            <!-- Dynamically filled -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sub 5: SQL Query Console (Database Query Simulator) -->
+    <div id="admin-sub-sql" class="admin-sub-panel">
+      <div class="panel-header-sub">
+        <div>
+          <h3>Database Query Console (SQL Simulator)</h3>
+          <p class="text-muted">Eksekusi perintah query SQL langsung (SELECT, INSERT, UPDATE, DELETE) pada tabel <code>users</code>, <code>fasilitas</code>, dan <code>peminjaman</code>.</p>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding:1.5rem; margin-bottom:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+          <span style="font-weight:700; color:var(--text-primary);"><i class="fa-solid fa-terminal text-primary"></i> Editor Perintah SQL:</span>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(1)">Query 1: Semua Mahasiswa</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(2)">Query 2: Alat Tersedia</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(3)">Query 3: Peminjaman Pending</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="setSampleSql(4)">Query 4: Riwayat Peminjaman</button>
+          </div>
+        </div>
+
+        <textarea id="sql-input-query" rows="4" style="width:100%; font-family:Consolas, 'Courier New', monospace; font-size:0.95rem; background:#0f172a; color:#38bdf8; border:1px solid #334155; border-radius:8px; padding:14px; outline:none; resize:vertical;" placeholder="Tuliskan query SQL di sini, contoh: SELECT * FROM users;"></textarea>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; flex-wrap:wrap; gap:10px;">
+          <div style="font-size:0.8rem; color:var(--text-muted);">
+            Tabel tersedia: <code style="color:#059669; font-weight:700;">users</code> (Mahasiswa & Admin), <code style="color:#059669; font-weight:700;">fasilitas</code> (Inventaris Alat), <code style="color:#059669; font-weight:700;">peminjaman</code> (Transaksi).
+          </div>
+          <button type="button" class="btn btn-primary" onclick="runSqlQuery()" style="padding:8px 20px;">
+            <i class="fa-solid fa-play"></i> Eksekusi Query
+          </button>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h4 style="font-weight:700;"><i class="fa-solid fa-table-list"></i> Hasil Eksekusi Query (Result Set)</h4>
+          <span id="sql-exec-info" style="font-size:0.82rem; color:var(--text-muted);">Status: Siap menjalankan query</span>
+        </div>
+        <div id="sql-result-container" style="overflow-x:auto; max-height:450px;">
+          <p class="text-muted" style="padding:1rem 0;">Belum ada query yang dieksekusi. Klik salah satu tombol contoh query atau ketik query SQL Anda di atas.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Tambah / Edit Fasilitas Baru (Admin) -->
+  <div class="modal-backdrop" id="modal-inventory">
+    <div class="modal-box glass-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-boxes-packing text-primary"></i> Tambah Sarana / Alat Perkuliahan Baru</h3>
+        <button class="close-btn" onclick="closeModal('modal-inventory')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="inventory-form">
+          <input type="hidden" id="inv-id">
+          <div class="form-group">
+            <label>Kode Barang (ID Unik) <span class="text-danger">*</span></label>
+            <input type="text" id="inv-code" placeholder="Contoh: PROJ-03 / HDMI-04" required>
+          </div>
+          <div class="form-group">
+            <label>Nama Barang / Tipe <span class="text-danger">*</span></label>
+            <input type="text" id="inv-name" placeholder="Contoh: Kabel HDMI 2.1 Braided 5M" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Kategori <span class="text-danger">*</span></label>
+              <select id="inv-category" required>
+                <option value="hdmi">Kabel HDMI</option>
+                <option value="proyektor">Proyektor</option>
+                <option value="coksambung">Cok Sambung</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Total Stok Unit <span class="text-danger">*</span></label>
+              <input type="number" id="inv-stock" min="1" max="100" value="5" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Lokasi Penyimpanan / Pos Sarpras <span class="text-danger">*</span></label>
+            <input type="text" id="inv-location" placeholder="Contoh: Pos Sarpras FST Lt. 1, Kampus IV Tuntungan" required>
+          </div>
+          <div class="form-group">
+            <label>Spesifikasi & Kelengkapan</label>
+            <textarea id="inv-specs" rows="2" placeholder="Panjang kabel, lumens proyektor, lubang colokan, dll."></textarea>
+          </div>
+          <div class="modal-footer-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-inventory')">Batal</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan ke Inventaris</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2026 <strong>Sarana Peminjaman Alat Kampus</strong> — Panel Khusus Administrator Sarpras Fakultas Sains dan Teknologi (FST) Kampus IV Tuntungan UIN Sumatera Utara Medan.</p>
+      <div class="footer-tags">
+        <span class="status-indicator online"></span> Mode Khusus Admin Aktif
+      </div>
+    </div>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>

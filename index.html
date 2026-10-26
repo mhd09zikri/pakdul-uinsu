@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarana Peminjaman Alat Kampus — UINSU Kampus IV Tuntungan</title>
+  <meta name="description" content="Sarana Peminjaman Alat Kampus: Sistem Peminjaman Alat Perkuliahan Fakultas Sains dan Teknologi (FST) Kampus IV Tuntungan UIN Sumatera Utara Medan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Auth Guard: Pertama kali web dibuka wajib login terlebih dahulu -->
+  <script>
+    (function() {
+      var user = localStorage.getItem('uinsu_user');
+      if (!user) {
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <!-- Background Glow & Shapes -->
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
+  <div class="glow-bg glow-3"></div>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="brand-logo-container">
+        <img src="logo-uinsu.png" alt="Logo UINSU Medan" class="brand-uinsu-logo">
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">SARANA <span class="gradient-text">PEMINJAMAN ALAT KAMPUS</span></span>
+        <span class="brand-sub">Fakultas Sains & Teknologi • Kampus IV Tuntungan</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Quick Role Switcher Pill -->
+      <div class="role-switcher-badge" id="role-pill-btn" title="Klik untuk kelola akun atau ganti profil">
+        <i class="fa-solid fa-id-badge"></i>
+        <span id="nav-user-label">Tamu (Belum Login)</span>
+      </div>
+
+      <div class="user-profile-menu" id="nav-user-actions">
+        <a href="login.html" class="btn btn-outline btn-sm" id="btn-nav-login" style="border-color:var(--primary); color:var(--primary);">
+          <i class="fa-solid fa-right-to-bracket"></i> Masuk
+        </a>
+        <a href="login.html" class="btn btn-primary btn-sm" id="btn-show-login" onclick="localStorage.setItem('uinsu_open_tab', 'register')" title="Daftar Akun Menggunakan NIM">
+          <i class="fa-solid fa-user-plus"></i> Daftar Akun (NIM)
+        </a>
+        <button class="btn btn-danger btn-sm hidden" id="btn-logout" title="Keluar dari akun dan ganti akun" onclick="logoutUser()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <!-- Sub Header / Navigation Tabs (Khusus Mahasiswa) -->
+    <div class="view-navigation">
+      <button class="nav-tab active" data-target="view-catalog" id="tab-catalog">
+        <i class="fa-solid fa-cubes"></i> Katalog Alat FST
+      </button>
+      <button class="nav-tab" data-target="view-my-loans" id="tab-my-loans">
+        <i class="fa-solid fa-clock-rotate-left"></i> Peminjaman Saya <span class="badge" id="my-active-badge">0</span>
+      </button>
+    </div>
+
+    <!-- VIEW 1: KATALOG & PINJAM (MAHASISWA & UMUM) -->
+    <section id="view-catalog" class="view-panel active">
+      <!-- Hero Banner -->
+      <div class="hero-banner glass-card">
+        <div class="hero-banner-bg"></div>
+        <div class="hero-content">
+          <div class="hero-badge-group">
+            <span class="hero-badge"><i class="fa-solid fa-atom"></i> Fakultas Sains & Teknologi (FST)</span>
+            <span class="hero-badge hero-badge-location"><i class="fa-solid fa-location-dot"></i> Kampus IV Tuntungan UINSU</span>
+          </div>
+          <h1 class="hero-title">Booking & Peminjaman Alat Perkuliahan FST UINSU</h1>
+          <p class="hero-desc">
+            Portal resmi <strong>Sarana Peminjaman Alat Kampus</strong> khusus sivitas akademika Fakultas Sains dan Teknologi, Gedung Kuliah FST Kampus IV Tuntungan. Booking online Kabel HDMI, Proyektor Lumens Tinggi, dan Cok Sambung dengan persetujuan cepat Admin Sarpras.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="stat-total-items">18</span>
+              <span class="stat-label">Total Unit</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number text-success" id="stat-ready-items">14</span>
+              <span class="stat-label">Siap Dipinjam</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number text-warning" id="stat-loaned-items">4</span>
+              <span class="stat-label">Sedang Dipakai</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-illustration">
+          <div class="floating-gadget card-hdmi">
+            <i class="fa-solid fa-network-wired"></i>
+            <div>
+              <strong>HDMI Cables</strong>
+              <small>4K Ultra-Fast</small>
+            </div>
+          </div>
+          <div class="floating-gadget card-projector">
+            <i class="fa-solid fa-video"></i>
+            <div>
+              <strong>Proyektor HD</strong>
+              <small>3800 ANSI Lumens</small>
+            </div>
+          </div>
+          <div class="floating-gadget card-plug">
+            <i class="fa-solid fa-plug-circle-bolt"></i>
+            <div>
+              <strong>Cok Sambung</strong>
+              <small>Kabel 5M - 10M</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter & Search Bar -->
+      <div class="filter-bar glass-card">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="catalog-search" placeholder="Cari nama fasilitas, lokasi, spesifikasi...">
+        </div>
+        <div class="category-pills">
+          <button class="pill active" data-category="all">Semua</button>
+          <button class="pill" data-category="hdmi"><i class="fa-solid fa-network-wired"></i> Kabel HDMI</button>
+          <button class="pill" data-category="proyektor"><i class="fa-solid fa-video"></i> Proyektor</button>
+          <button class="pill" data-category="coksambung"><i class="fa-solid fa-plug-circle-bolt"></i> Cok Sambung</button>
+        </div>
+      </div>
+
+      <!-- Items Grid -->
+      <div class="items-grid" id="items-grid-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: PEMINJAMAN SAYA (MAHASISWA DASHBOARD) -->
+    <section id="view-my-loans" class="view-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Riwayat & Status Peminjaman Saya</h2>
+          <p class="text-muted">Pantau status persetujuan, batas waktu pengembalian, dan QR Code tanda terima.</p>
+        </div>
+        <div class="user-info-card glass-card" id="my-profile-summary">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Loan Table / Cards -->
+      <div class="table-container glass-card">
+        <table class="custom-table" id="my-loans-table">
+          <thead>
+            <tr>
+              <th>ID Pinjam</th>
+              <th>Barang / Fasilitas</th>
+              <th>Waktu Pinjam</th>
+              <th>Batas Kembali</th>
+              <th>Tujuan / Ruangan</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="my-loans-body">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+        <div id="my-loans-empty" class="empty-state hidden">
+          <i class="fa-solid fa-box-open"></i>
+          <h3>Belum Ada Peminjaman</h3>
+          <p>Anda belum meminjam barang apapun. Kunjungi katalog untuk mengajukan peminjaman sekarang.</p>
+          <button class="btn btn-primary" onclick="switchView('view-catalog')">Buka Katalog</button>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal 1: Auth / Login & Register Dialog -->
+  <div class="modal-backdrop" id="modal-auth">
+    <div class="modal-box glass-card modal-lg">
+      <div class="modal-header">
+        <h3 id="auth-modal-title"><i class="fa-solid fa-user-shield text-primary"></i> Akses & Autentikasi Pengguna UINSU</h3>
+        <button class="close-btn" onclick="closeModal('modal-auth')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Sub Tabs: Login, Register, Demo -->
+        <div class="auth-sub-tabs">
+          <button type="button" class="auth-tab-btn active" id="auth-tab-btn-login" onclick="switchAuthTab('login')">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk Akun
+          </button>
+          <button type="button" class="auth-tab-btn" id="auth-tab-btn-register" onclick="switchAuthTab('register')">
+            <i class="fa-solid fa-user-plus"></i> Buat Akun Mahasiswa
+          </button>
+          <button type="button" class="auth-tab-btn" id="auth-tab-btn-demo" onclick="switchAuthTab('demo')">
+            <i class="fa-solid fa-bolt"></i> Akun Cepat / Demo
+          </button>
+        </div>
+
+        <!-- PANEL 1: LOGIN -->
+        <div class="auth-panel active" id="auth-panel-login">
+          <p class="modal-sub">Masukkan NIM (Mahasiswa) atau Username/NIP (Admin) beserta password Anda:</p>
+          <form id="login-form">
+            <div class="form-group">
+              <label><i class="fa-solid fa-id-card"></i> NIM Mahasiswa / Username Admin <span class="text-danger">*</span></label>
+              <input type="text" id="login-identifier" placeholder="Contoh: 0701222012 atau admin" required autocomplete="username">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-lock"></i> Password <span class="text-danger">*</span></label>
+              <input type="password" id="login-password" placeholder="Masukkan password..." required autocomplete="current-password">
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.2rem; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-light);">
+              <i class="fa-solid fa-circle-info text-primary"></i> <b>Petunjuk Cepat:</b><br>
+              &bull; <b>Mahasiswa Preset:</b> NIM <code>0701222012</code> / password: <code>123</code><br>
+              &bull; <b>Admin Sarpras:</b> Username <code>admin</code> / password: <code>admin</code>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+            </button>
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+              Belum punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color: var(--primary); font-weight: 700; text-decoration: none;">Daftar Akun Mahasiswa Baru</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- PANEL 2: REGISTRASI MAHASISWA BARU -->
+        <div class="auth-panel" id="auth-panel-register">
+          <p class="modal-sub">Formulir pendaftaran akun mahasiswa baru untuk sarana peminjaman fasilitas UINSU:</p>
+          <form id="register-student-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fa-solid fa-address-card"></i> NIM Mahasiswa <span class="text-danger">*</span></label>
+                <input type="text" id="reg-nim" placeholder="Contoh: 0701232015" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fa-solid fa-user"></i> Nama Lengkap <span class="text-danger">*</span></label>
+                <input type="text" id="reg-name" placeholder="Nama mahasiswa..." required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fa-solid fa-chalkboard-user"></i> Kelas / Rombel Asal <span class="text-danger">*</span></label>
+                <input type="text" id="reg-class" placeholder="Contoh: ILKOM-1 / SI-2" required>
+              </div>
+              <div class="form-group">
+                <label><i class="fa-solid fa-building-columns"></i> Program Studi <span class="text-danger">*</span></label>
+                <select id="reg-prodi" required style="width:100%; padding:10px 12px; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-size:0.9rem; background:#f0fdf4; color:#065f46; font-weight:700;">
+                  <option value="S1 Ilmu Komputer (FST)">S1 Ilmu Komputer (FST)</option>
+                </select>
+                <small style="color:#047857; font-size:0.75rem;"><i class="fa-solid fa-circle-check"></i> Khusus Mahasiswa Prodi Ilmu Komputer</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label><i class="fa-brands fa-whatsapp"></i> No. WhatsApp Aktif <span class="text-danger">*</span></label>
+              <input type="tel" id="reg-phone" placeholder="Contoh: 081260123456" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fa-solid fa-key"></i> Buat Password <span class="text-danger">*</span></label>
+                <input type="password" id="reg-password" placeholder="Minimal 4 karakter" minlength="4" required autocomplete="new-password">
+              </div>
+              <div class="form-group">
+                <label><i class="fa-solid fa-check-double"></i> Ulangi Password <span class="text-danger">*</span></label>
+                <input type="password" id="reg-password-confirm" placeholder="Ketik ulang password" minlength="4" required autocomplete="new-password">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa-solid fa-user-plus"></i> Daftarkan Akun Mahasiswa & Masuk
+            </button>
+            <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+              Sudah punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color: var(--primary); font-weight: 700; text-decoration: none;">Masuk di sini</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- PANEL 3: DEMO QUICK PROFILES -->
+        <div class="auth-panel" id="auth-panel-demo">
+          <p class="modal-sub">Pilih salah satu akun demo untuk masuk langsung dalam 1 klik:</p>
+          <div class="account-selector-grid">
+            <!-- Mahasiswa Preset 1 -->
+            <div class="account-card" data-role="student" data-user-idx="0">
+              <div class="acc-avatar bg-indigo"><i class="fa-solid fa-user-graduate"></i></div>
+              <div class="acc-info">
+                <span class="acc-name">Ahmad Farhan</span>
+                <span class="acc-sub">NIM: 0701222012 | Kelas ILKOM-1 (FST UINSU)</span>
+                <span class="acc-badge">Mahasiswa FST &bull; Login Cepat</span>
+              </div>
+            </div>
+
+            <!-- Mahasiswa Preset 2 -->
+            <div class="account-card" data-role="student" data-user-idx="1">
+              <div class="acc-avatar bg-pink"><i class="fa-solid fa-user-graduate"></i></div>
+              <div class="acc-info">
+                <span class="acc-name">Siti Nurhaliza</span>
+                <span class="acc-sub">NIM: 0702223088 | Kelas SI-2 (FST UINSU)</span>
+                <span class="acc-badge">Mahasiswa FST &bull; Login Cepat</span>
+              </div>
+            </div>
+
+            <!-- Admin Khusus Preset -->
+            <div class="account-card highlight-admin" data-role="admin">
+              <div class="acc-avatar bg-amber"><i class="fa-solid fa-user-shield"></i></div>
+              <div class="acc-info">
+                <span class="acc-name">Admin Sarpras FST (Pakdul)</span>
+                <span class="acc-sub">NIP: 198402122010121003 | Koordinator Alat FST Kampus IV Tuntungan</span>
+                <span class="acc-badge badge-admin">Akun Khusus Admin (Bisa ACC / Tolak Alat)</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="auth-logout-area" style="margin-top: 1.5rem; border-top: 1px solid var(--border-light); padding-top: 1.2rem;">
+            <button type="button" class="btn btn-outline btn-block text-danger" onclick="logoutUser()">
+              <i class="fa-solid fa-right-from-bracket"></i> Keluar dari Sesi Saat Ini
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Form Pengajuan Peminjaman -->
+  <div class="modal-backdrop" id="modal-pinjam">
+    <div class="modal-box glass-card modal-lg">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-clipboard-list text-primary"></i> Formulir Pengajuan Peminjaman</h3>
+        <button class="close-btn" onclick="closeModal('modal-pinjam')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="item-selected-preview" id="pinjam-item-preview">
+          <!-- Injected via JS -->
+        </div>
+
+        <form id="loan-request-form">
+          <input type="hidden" id="loan-item-id">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fa-solid fa-user"></i> Nama Lengkap Peminjam <span class="text-danger">*</span></label>
+              <input type="text" id="loan-student-name" required placeholder="Nama lengkap mahasiswa">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-id-card"></i> NIM Mahasiswa <span class="text-danger">*</span></label>
+              <input type="text" id="loan-student-nim" required placeholder="Contoh: 0701222012">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fa-solid fa-chalkboard-user"></i> Kelas / Rombel Asal <span class="text-danger">*</span></label>
+              <input type="text" id="loan-student-class" required placeholder="Contoh: ILKOM-1 / SI-2 / MAT-1 / FIS-3">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-building-columns"></i> Program Studi <span class="text-danger">*</span></label>
+              <select id="loan-student-prodi" required style="background:#f0fdf4; color:#065f46; font-weight:700;">
+                <option value="S1 Ilmu Komputer (FST)">S1 Ilmu Komputer (FST)</option>
+              </select>
+              <small style="color:#047857; font-size:0.75rem;"><i class="fa-solid fa-circle-check"></i> Khusus Mahasiswa Prodi Ilmu Komputer</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fa-solid fa-phone"></i> No. WhatsApp / HP Aktif <span class="text-danger">*</span></label>
+              <input type="tel" id="loan-phone" placeholder="Contoh: 081260123456" required>
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-hashtag"></i> Jumlah Unit <span class="text-danger">*</span></label>
+              <input type="number" id="loan-qty" min="1" max="5" value="1" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar-check"></i> Waktu Booking (Mulai Pakai) <span class="text-danger">*</span></label>
+              <input type="datetime-local" id="loan-start-time" required>
+            </div>
+            <div class="form-group">
+              <label><i class="fa-regular fa-calendar-xmark"></i> Perkiraan Selesai / Kembali <span class="text-danger">*</span></label>
+              <input type="datetime-local" id="loan-end-time" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><i class="fa-solid fa-door-open"></i> Lokasi Ruangan Perkuliahan (Kampus IV Tuntungan) <span class="text-danger">*</span></label>
+              <input type="text" id="loan-room" placeholder="Contoh: Ruang FST-201 / Lab Komputer Saintek Lt. 2" required>
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-bullseye"></i> Tujuan Keperluan <span class="text-danger">*</span></label>
+              <select id="loan-purpose" required>
+                <option value="">-- Pilih Keperluan Perkuliahan --</option>
+                <option value="Perkuliahan & Presentasi Kelas">Perkuliahan & Presentasi Kelas</option>
+                <option value="Praktikum Lab Sains & Teknologi">Praktikum Lab Sains & Teknologi</option>
+                <option value="Sidang Skripsi / Seminar Proposal FST">Sidang Skripsi / Seminar Proposal FST</option>
+                <option value="Kegiatan Himpunan Mahasiswa (HIMA FST)">Kegiatan Himpunan Mahasiswa (HIMA FST)</option>
+                <option value="Workshop / Pelatihan Teknologi">Workshop / Pelatihan Teknologi</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-comment-dots"></i> Keterangan Tambahan / Spesifikasi Khusus</label>
+            <textarea id="loan-notes" rows="2" placeholder="Catatan tambahan (contoh: butuh colokan 3 kaki atau kabel HDMI tipe-C)"></textarea>
+          </div>
+
+          <div class="terms-card">
+            <label class="checkbox-container">
+              <input type="checkbox" id="loan-agreement" required>
+              <span class="checkmark"></span>
+              <span class="terms-text">Saya bersedia menjaga keutuhan fasilitas, tidak memindahtangankan, dan siap bertanggung jawab penuh atas segala kerusakan/kehilangan.</span>
+            </label>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-pinjam')">Batal</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Ajukan Peminjaman</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Bukti Pinjam Digital / QR Pass -->
+  <div class="modal-backdrop" id="modal-digital-pass">
+    <div class="modal-box glass-card text-center pass-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-ticket text-success"></i> Kartu Izin Peminjaman</h3>
+        <button class="close-btn" onclick="closeModal('modal-digital-pass')">&times;</button>
+      </div>
+      <div class="modal-body" id="pass-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Tambah / Edit Fasilitas (Admin) -->
+  <div class="modal-backdrop" id="modal-inventory">
+    <div class="modal-box glass-card">
+      <div class="modal-header">
+        <h3 id="inv-modal-title"><i class="fa-solid fa-plus-circle text-primary"></i> Tambah Sarana Fasilitas</h3>
+        <button class="close-btn" onclick="closeModal('modal-inventory')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="inventory-form">
+          <input type="hidden" id="inv-id">
+          <div class="form-group">
+            <label>Kode Barang (ID Unik)</label>
+            <input type="text" id="inv-code" placeholder="Contoh: PROJ-03 / HDMI-04" required>
+          </div>
+          <div class="form-group">
+            <label>Nama Barang / Tipe</label>
+            <input type="text" id="inv-name" placeholder="Contoh: Kabel HDMI 2.1 Braided 5M" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Kategori</label>
+              <select id="inv-category" required>
+                <option value="hdmi">Kabel HDMI</option>
+                <option value="proyektor">Proyektor</option>
+                <option value="coksambung">Cok Sambung</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Total Stok Unit</label>
+              <input type="number" id="inv-stock" min="1" max="100" value="5" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Lokasi Penyimpanan / Lab</label>
+            <input type="text" id="inv-location" placeholder="Contoh: Ruang Sarpras Gedung A Lt 1" required>
+          </div>
+          <div class="form-group">
+            <label>Spesifikasi & Kelengkapan</label>
+            <textarea id="inv-specs" rows="2" placeholder="Panjang kabel, lumens proyektor, lubang colokan, dll."></textarea>
+          </div>
+          <div class="modal-footer-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modal-inventory')">Batal</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan Sarana</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2026 <strong>Sarana Peminjaman Alat Kampus</strong> — Pengelolaan & Peminjaman Alat Perkuliahan Fakultas Sains dan Teknologi (FST) Kampus IV Tuntungan, Universitas Islam Negeri Sumatera Utara Medan.</p>
+      <div class="footer-tags">
+        <span class="status-indicator online"></span> Server FST Tuntungan Terhubung
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

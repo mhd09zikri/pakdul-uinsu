@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk — Sarana Peminjaman Alat Kampus | FST UINSU</title>
+  <meta name="description" content="Halaman login dan pendaftaran Sarana Peminjaman Alat Kampus UIN Sumatera Utara Medan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="ig-bg-wrapper">
+    <div class="ig-gradient-orb orb-1"></div>
+    <div class="ig-gradient-orb orb-2"></div>
+    <div class="ig-gradient-orb orb-3"></div>
+    <div class="ig-gradient-orb orb-4"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Main Auth Container (Instagram Style) -->
+  <div class="ig-auth-container">
+
+    <!-- Left Side: Phone Mockup (Desktop only) -->
+    <div class="ig-phone-side">
+      <div class="ig-phone-frame">
+        <div class="ig-phone-notch"></div>
+        <div class="ig-phone-screen">
+          <!-- Animated Visual Showcase (Tanpa Teks Tersedia, Animasi Barang Bergerak) -->
+          <div class="ig-slideshow">
+            <!-- Slide 1: Proyektor HD -->
+            <div class="ig-slide active">
+              <div class="ig-slide-visual">
+                <div class="ig-item-stage">
+                  <div class="ig-orbit-circle"></div>
+                  <div class="ig-float-icon-main projector-theme">
+                    <i class="fa-solid fa-video"></i>
+                  </div>
+                  <div class="ig-float-sub-chip chip-1">
+                    <i class="fa-solid fa-bolt"></i> 3800 Lumens
+                  </div>
+                  <div class="ig-float-sub-chip chip-2">
+                    <i class="fa-solid fa-sparkles"></i> 4K / HD
+                  </div>
+                </div>
+                <h3 class="ig-visual-title">Proyektor HD</h3>
+              </div>
+            </div>
+
+            <!-- Slide 2: Kabel HDMI -->
+            <div class="ig-slide">
+              <div class="ig-slide-visual">
+                <div class="ig-item-stage">
+                  <div class="ig-orbit-circle"></div>
+                  <div class="ig-float-icon-main hdmi-theme">
+                    <i class="fa-solid fa-network-wired"></i>
+                  </div>
+                  <div class="ig-float-sub-chip chip-1">
+                    <i class="fa-solid fa-gauge-high"></i> Ultra Speed
+                  </div>
+                  <div class="ig-float-sub-chip chip-2">
+                    <i class="fa-solid fa-tv"></i> HDMI 2.1
+                  </div>
+                </div>
+                <h3 class="ig-visual-title">Kabel HDMI</h3>
+              </div>
+            </div>
+
+            <!-- Slide 3: Cok Sambung -->
+            <div class="ig-slide">
+              <div class="ig-slide-visual">
+                <div class="ig-item-stage">
+                  <div class="ig-orbit-circle"></div>
+                  <div class="ig-float-icon-main cok-theme">
+                    <i class="fa-solid fa-plug-circle-bolt"></i>
+                  </div>
+                  <div class="ig-float-sub-chip chip-1">
+                    <i class="fa-solid fa-shield-halved"></i> Surge Protect
+                  </div>
+                  <div class="ig-float-sub-chip chip-2">
+                    <i class="fa-solid fa-ruler"></i> 10 Meter
+                  </div>
+                </div>
+                <h3 class="ig-visual-title">Cok Sambung</h3>
+              </div>
+            </div>
+
+            <!-- Slide 4: Tiket QR Code -->
+            <div class="ig-slide">
+              <div class="ig-slide-visual">
+                <div class="ig-item-stage">
+                  <div class="ig-orbit-circle"></div>
+                  <div class="ig-float-icon-main qr-theme">
+                    <i class="fa-solid fa-qrcode"></i>
+                  </div>
+                  <div class="ig-float-sub-chip chip-1">
+                    <i class="fa-solid fa-circle-check"></i> Instant Scan
+                  </div>
+                  <div class="ig-float-sub-chip chip-2">
+                    <i class="fa-solid fa-ticket"></i> E-Ticket
+                  </div>
+                </div>
+                <h3 class="ig-visual-title">Tiket Digital</h3>
+              </div>
+            </div>
+          </div>
+          <!-- Slide Dots -->
+          <div class="ig-slide-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Auth Forms -->
+    <div class="ig-form-side">
+
+      <!-- Card 1: Login / Register Form -->
+      <div class="ig-card ig-card-main">
+        <!-- Brand Header -->
+        <div class="ig-brand-header">
+          <div class="ig-brand-logo-wrap">
+            <img src="logo-uinsu.png" alt="Logo UINSU" class="ig-brand-logo">
+          </div>
+          <h1 class="ig-brand-name" style="font-size:1.4rem;">Sarana Peminjaman <span>Alat Kampus</span></h1>
+          <p class="ig-brand-tagline">Sistem Peminjaman Fasilitas & Alat FST Tuntungan</p>
+        </div>
+
+        <!-- Top Auth Tabs for Quick Switch -->
+        <div class="ig-auth-sub-tabs">
+          <button type="button" class="ig-auth-tab-btn active" id="ig-tab-btn-login" onclick="switchToTab('login')">
+            <i class="fa-solid fa-right-to-bracket"></i> Masuk
+          </button>
+          <button type="button" class="ig-auth-tab-btn" id="ig-tab-btn-register" onclick="switchToTab('register')">
+            <i class="fa-solid fa-user-plus"></i> Daftar Akun (NIM)
+          </button>
+          <button type="button" class="ig-auth-tab-btn" id="ig-tab-btn-demo" onclick="switchToTab('demo')">
+            <i class="fa-solid fa-bolt"></i> Demo
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="ig-login-form" class="ig-form ig-form-active">
+          <div class="ig-input-group">
+            <input type="text" id="ig-login-id" placeholder=" " required autocomplete="username">
+            <label for="ig-login-id">NIM Mahasiswa / Username Admin</label>
+            <i class="fa-solid fa-id-card ig-input-icon"></i>
+          </div>
+          <div class="ig-input-group">
+            <input type="password" id="ig-login-pass" placeholder=" " required autocomplete="current-password">
+            <label for="ig-login-pass">Password</label>
+            <i class="fa-solid fa-lock ig-input-icon"></i>
+            <button type="button" class="ig-toggle-pass" onclick="togglePasswordVisibility('ig-login-pass', this)">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <button type="submit" class="ig-btn-primary" id="ig-btn-login">
+            <span class="ig-btn-text">Masuk</span>
+            <span class="ig-btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+          </button>
+
+          <!-- Divider -->
+          <div class="ig-divider">
+            <span>ATAU</span>
+          </div>
+
+          <!-- Demo Quick Access -->
+          <button type="button" class="ig-btn-demo" onclick="switchToTab('demo')">
+            <i class="fa-solid fa-bolt"></i> Masuk Cepat (Demo Akun)
+          </button>
+
+          <!-- Hint Box with 1-Click Auto Fill -->
+          <div class="ig-hint-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <div style="margin-bottom:4px;">
+                <strong>Mahasiswa FST:</strong> 
+                <button type="button" class="btn-chip" onclick="quickFill('0701222012', '123')" title="Klik untuk mengisi otomatis" style="cursor:pointer; background:rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.1); border-radius:4px; padding:2px 6px; font-size:0.78rem; font-family:monospace;">
+                  <code>0701222012</code> / <code>123</code> <i class="fa-solid fa-arrow-turn-down" style="font-size:0.7rem;"></i>
+                </button>
+              </div>
+              <div>
+                <strong>Admin (Pakdul):</strong> 
+                <button type="button" class="btn-chip" onclick="quickFill('admin', 'admin')" title="Klik untuk mengisi otomatis" style="cursor:pointer; background:rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.1); border-radius:4px; padding:2px 6px; font-size:0.78rem; font-family:monospace;">
+                  <code>admin</code> / <code>admin</code> <i class="fa-solid fa-arrow-turn-down" style="font-size:0.7rem;"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <a href="javascript:void(0)" class="ig-forgot-link" onclick="showToast('Hubungi Koordinator Sarpras FST Kampus IV Tuntungan untuk reset password.', 'info')">Lupa password?</a>
+        </form>
+
+        <!-- Register Form -->
+        <form id="ig-register-form" class="ig-form">
+          <p class="ig-register-intro">Pendaftaran Akun Mahasiswa Fakultas Sains & Teknologi (FST) UINSU Medan menggunakan NIM.</p>
+
+          <div class="ig-input-group">
+            <input type="text" id="ig-reg-nim" placeholder=" " required pattern="[0-9]{8,15}" title="Masukkan nomor NIM mahasiswa yang valid">
+            <label for="ig-reg-nim">NIM Mahasiswa (Contoh: 0701222015)</label>
+            <i class="fa-solid fa-address-card ig-input-icon"></i>
+          </div>
+          <div class="ig-input-group">
+            <input type="text" id="ig-reg-name" placeholder=" " required>
+            <label for="ig-reg-name">Nama Lengkap Mahasiswa</label>
+            <i class="fa-solid fa-user ig-input-icon"></i>
+          </div>
+          <div class="ig-input-group">
+            <input type="text" id="ig-reg-class" placeholder=" " required>
+            <label for="ig-reg-class">Kelas / Rombel Asal (Contoh: ILKOM-1 / SI-2)</label>
+            <i class="fa-solid fa-chalkboard-user ig-input-icon"></i>
+          </div>
+          <div class="ig-input-group">
+            <input type="text" id="ig-reg-prodi" value="S1 Ilmu Komputer (FST)" readonly required style="width:100%; padding:14px 14px 14px 42px; background:rgba(5, 150, 105, 0.08); border:1px solid rgba(5, 150, 105, 0.3); border-radius:var(--ig-radius); font-family:inherit; font-size:0.88rem; color:#065f46; font-weight:700; outline:none; cursor:not-allowed;">
+            <label for="ig-reg-prodi" style="top:-1px; transform:translateY(-50%); font-size:0.7rem; color:var(--ig-green); background:var(--ig-card); left:36px; font-weight:600;">Program Studi (Khusus Ilmu Komputer FST)</label>
+            <i class="fa-solid fa-building-columns ig-input-icon" style="color:var(--ig-green);"></i>
+          </div>
+          <div style="font-size:0.74rem; color:#047857; margin:-2px 0 8px 4px; display:flex; align-items:center; gap:5px;">
+            <i class="fa-solid fa-circle-check"></i> Layanan peminjaman alat saat ini dikhususkan untuk <b>Prodi Ilmu Komputer (ILKOM)</b>.
+          </div>
+          <div class="ig-input-group">
+            <input type="tel" id="ig-reg-phone" placeholder=" " required>
+            <label for="ig-reg-phone">No. WhatsApp Aktif</label>
+            <i class="fa-brands fa-whatsapp ig-input-icon"></i>
+          </div>
+          <div class="ig-input-group">
+            <input type="password" id="ig-reg-pass" placeholder=" " minlength="4" required autocomplete="new-password">
+            <label for="ig-reg-pass">Buat Password</label>
+            <i class="fa-solid fa-key ig-input-icon"></i>
+            <button type="button" class="ig-toggle-pass" onclick="togglePasswordVisibility('ig-reg-pass', this)">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <div class="ig-input-group">
+            <input type="password" id="ig-reg-pass-confirm" placeholder=" " minlength="4" required autocomplete="new-password">
+            <label for="ig-reg-pass-confirm">Ulangi Password</label>
+            <i class="fa-solid fa-check-double ig-input-icon"></i>
+          </div>
+
+          <p class="ig-terms-text">
+            Khusus sivitas akademika Fakultas Sains & Teknologi (FST) Kampus IV Tuntungan. Dengan mendaftar, Anda menyetujui tata tertib peminjaman.
+          </p>
+
+          <button type="submit" class="ig-btn-primary">
+            <span class="ig-btn-text">Daftar Akun Mahasiswa FST</span>
+            <span class="ig-btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+          </button>
+        </form>
+
+        <!-- Demo Panel -->
+        <div id="ig-demo-panel" class="ig-form">
+          <p class="ig-register-intro">Pilih profil untuk langsung masuk & uji coba:</p>
+
+          <div class="ig-demo-cards">
+            <!-- Akun Mahasiswa 1 -->
+            <div class="ig-demo-card" data-role="student" data-idx="0">
+              <div class="ig-demo-avatar student">
+                <i class="fa-solid fa-user-graduate"></i>
+              </div>
+              <div class="ig-demo-info">
+                <strong>Ahmad Farhan</strong>
+                <span>NIM: 0701222012 • Kelas ILKOM-1</span>
+                <span class="ig-demo-role-tag">Mahasiswa FST</span>
+              </div>
+              <i class="fa-solid fa-chevron-right ig-demo-arrow"></i>
+            </div>
+
+            <!-- Akun Mahasiswa 2 -->
+            <div class="ig-demo-card" data-role="student" data-idx="1">
+              <div class="ig-demo-avatar student-2">
+                <i class="fa-solid fa-user-graduate"></i>
+              </div>
+              <div class="ig-demo-info">
+                <strong>Siti Nurhaliza</strong>
+                <span>NIM: 0701223088 • Kelas ILKOM-2</span>
+                <span class="ig-demo-role-tag">Mahasiswa Ilmu Komputer</span>
+              </div>
+              <i class="fa-solid fa-chevron-right ig-demo-arrow"></i>
+            </div>
+
+            <!-- Akun Khusus Admin -->
+            <div class="ig-demo-card ig-demo-admin" data-role="admin">
+              <div class="ig-demo-avatar admin">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <div class="ig-demo-info">
+                <strong>Admin Sarpras FST (Pakdul)</strong>
+                <span>Username: admin • Koordinator Alat FST</span>
+                <span class="ig-demo-role-tag admin-tag"><i class="fa-solid fa-circle-check"></i> Akun Khusus Admin (Bisa ACC)</span>
+              </div>
+              <i class="fa-solid fa-chevron-right ig-demo-arrow"></i>
+            </div>
+          </div>
+
+          <button type="button" class="ig-btn-back" onclick="switchToTab('login')">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Login
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Switch Tab -->
+      <div class="ig-card ig-card-switch" id="ig-switch-card">
+        <p id="ig-switch-text">Belum punya akun? <a href="javascript:void(0)" id="ig-switch-link" onclick="switchToTab('register')"><strong>Daftar</strong></a></p>
+      </div>
+
+      <!-- Footer Links -->
+      <div class="ig-footer-links">
+        <a href="index.html" class="ig-app-badge" style="justify-content:center; text-decoration:none; margin-bottom:10px; width:100%; font-weight:600;">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda / Katalog Alat
+        </a>
+        <span>Download Panduan:</span>
+        <div class="ig-app-badges">
+          <a href="#" class="ig-app-badge">
+            <i class="fa-solid fa-file-pdf"></i> Panduan Mahasiswa
+          </a>
+          <a href="#" class="ig-app-badge">
+            <i class="fa-solid fa-book-open"></i> FAQ
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <footer class="ig-page-footer">
+    <div class="ig-footer-inner">
+      <div class="ig-footer-links-row">
+        <a href="#">Tentang</a>
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Sarpras</a>
+        <a href="#">Peta Kampus</a>
+      </div>
+      <p>© 2026 Sarana Peminjaman Alat Kampus — Fakultas Sains & Teknologi (FST) Kampus IV Tuntungan, UIN Sumatera Utara Medan</p>
+    </div>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+</html>
